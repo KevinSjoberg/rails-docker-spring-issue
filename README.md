@@ -21,3 +21,9 @@ window/tab.
 ```
 web_1  | E, [2020-11-21T08:36:03.109876 #1] ERROR -- : reaped #<Process::Status: pid 15 SIGHUP (signal 1)> worker=unknown
 ```
+
+I believe the combination of [Unicorn](https://yhbt.net/unicorn/) &
+[Spring](https://github.com/rails/spring) is the problem. If you change the
+Docker Compose command from `["bundle", "exec", "unicorn_rails"]` to
+`["bin/rails", "s", "-b", "0.0.0.0"]` and retry the above steps, we're not
+seeing the same behaviour.
